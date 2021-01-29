@@ -30,6 +30,7 @@ public class DataGenerator {
     // Месяц окончания срока действия карты
 
     public static String nowMonth() {
+
         return LocalDate.now().format(DateTimeFormatter.ofPattern("MM"));
     }
 
@@ -72,7 +73,7 @@ public class DataGenerator {
     // CVC/CVV код
 
     public static String validCvcCvv() {
-        return String.format("%03d", faker.number().randomNumber(3,true);
+        return String.format("%03d", faker.number().randomNumber(3,true));
     }
 
     public static String invalidCvcCvv() {
