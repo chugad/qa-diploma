@@ -1,13 +1,12 @@
 package ru.netology;
 
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 class PageTest {
 
@@ -35,12 +34,13 @@ class PageTest {
     @Test
     // 1. Успешная покупка тура с валидным номером карты с разрешенной оплатой (APPROVED).
     public void happyPathCard() {
-        $(byText("Купить")).waitUntil(text("Купить"), 4000).shouldBe(visible).click();
-        $(byText("Номер карты")).setValue(approveCardNum);
-        $(byText("Месяц")).setValue(nowM);
-        $(byText("Год")).setValue(nowY);
-        $(byText("Владелец")).setValue(validCardOwn);
-        $(byText("CVC/CVV")).setValue(validCvc);
-        $(".notification__content").waitUntil(text("Операция одобрена Банком."), 15000).shouldBe(visible);
+        $$("button").find(visible.exactText("Купить в кредит")).click();
+        $$(".input__control").get(0).setValue(approveCardNum);
+        $$(".input__control").get(1).setValue(nowM);
+        $$(".input__control").get(2).setValue(nowY);
+        $$(".input__control").get(3).setValue(validCardOwn);
+        $$(".input__control").get(4).setValue("999");
+        $$("button").find(visible.exactText("Продолжить")).click();
+        $(byText("Операция одобрена Банком.")).waitUntil(visible, 10000);
     }
 }
