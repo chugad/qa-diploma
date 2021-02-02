@@ -1,0 +1,20 @@
+package ru.netology;
+
+import lombok.Data;
+
+@Data
+public class Card {
+    private String cardNumber;
+    private String month;
+    private String year;
+    private String owner;
+    private String cvcCvv;
+
+    public Card() {
+        cardNumber = CardDataGenerator.randomCardNumber();
+        month = CardDataGenerator.nowMonth();
+        year = CardDataGenerator.nowYear();
+        owner = CardDataGenerator.validCardOwner();
+        cvcCvv = CardDataGenerator.validCvcCvv();
+    }
+}
