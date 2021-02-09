@@ -1,6 +1,8 @@
 package ru.netology;
 
 import com.github.javafaker.Faker;
+import com.github.javafaker.SlackEmoji;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -19,8 +21,16 @@ public class CardDataGenerator {
         return "4444444444444442";
     }
 
+    public static String invalidCardNumber1() {
+        return String.valueOf(faker.number().randomNumber(1, true));
+    }
+
+    public static String invalidCardNumber15() {
+        return String.valueOf(faker.number().randomNumber(15, true));
+    }
+
     public static String invalidCardNumber() {
-        return String.valueOf(faker.number().randomNumber(faker.number().numberBetween(1,15), true));
+        return String.valueOf(faker.number().randomNumber(16, true));
     }
 
     public static String randomCardNumber() {
@@ -34,8 +44,12 @@ public class CardDataGenerator {
         return LocalDate.now().format(DateTimeFormatter.ofPattern("MM"));
     }
 
-    public static String randomMonth() {
+    public static String validMonth() {
         return LocalDate.now().plusMonths(faker.number().numberBetween(1,12)).format(DateTimeFormatter.ofPattern("MM"));
+    }
+
+    public static String invalidMonth() {
+        return String.valueOf(faker.number().numberBetween(13,99));
     }
 
     // Год окончания срока действия карты
@@ -44,15 +58,15 @@ public class CardDataGenerator {
         return LocalDate.now().format(DateTimeFormatter.ofPattern("YY"));
     }
 
-    public static String pastYear() {
+    public static String invalidYearPast() {
         return LocalDate.now().minusYears(faker.number().numberBetween(1,5)).format(DateTimeFormatter.ofPattern("YY"));
     }
 
-    public static String futureValidYear() { // срок действия карты обычно составляет 4 года
-        return LocalDate.now().plusYears(faker.number().numberBetween(1,4)).format(DateTimeFormatter.ofPattern("YY"));
+    public static String validYear() { // срок действия карты обычно составляет 4 года
+        return LocalDate.now().plusYears(faker.number().numberBetween(0,4)).format(DateTimeFormatter.ofPattern("YY"));
     }
 
-    public static String futureInvalidYear() { // срок действия карты обычно составляет 4 года
+    public static String invalidYearFuture() { // срок действия карты обычно составляет 4 года
         return LocalDate.now().plusYears(faker.number().numberBetween(5,50)).format(DateTimeFormatter.ofPattern("YY"));
     }
 
@@ -63,11 +77,17 @@ public class CardDataGenerator {
     }
 
     public static String invalidCardOwner() {
-        Faker faker = new Faker(new Locale("ru"));
+        Faker faker = new Faker(new Locale("es"));
         String randomName1 = faker.name().lastName();
         String randomName2 = faker.internet().password();
-        String randomName = randomName1 + " " + randomName2;
+        SlackEmoji randomName3 = faker.slackEmoji();
+        String randomName = randomName1 + " " + randomName2 + " " + randomName3;
         return randomName;
+    }
+
+    public static String invalidCardOwnerRusLanguage() {
+        Faker faker = new Faker(new Locale("ru"));
+        return faker.name().lastName();
     }
 
     // CVC/CVV код

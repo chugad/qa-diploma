@@ -12,8 +12,8 @@ public class Card {
 
     public Card() {
         cardNumber = CardDataGenerator.randomCardNumber();
-        month = CardDataGenerator.nowMonth();
-        year = CardDataGenerator.nowYear();
+        month = CardDataGenerator.validMonth();
+        year = CardDataGenerator.validYear();
         owner = CardDataGenerator.validCardOwner();
         cvcCvv = CardDataGenerator.validCvcCvv();
     }

@@ -1,6 +1,5 @@
 package ru.netology;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.*;
@@ -27,14 +26,13 @@ public class Page {
     // успешная покупка
 
     private final SelenideElement happyPurchaseCard = $(byText("Операция одобрена Банком."));
+    private final SelenideElement errorPurchaseCard = $(byText("Ошибка"));
 
-    // метод для выбора страницы с покупкой карты
+    // метод для выбора страницы
 
     public void clickCardPayBottom() {
         payCardBottom.click();
     }
-
-    // метод для выбора страницы с покупкой в кредит
 
     public void clickCreditCardPayBottom() {
         payCreditCardBottom.click();
@@ -62,4 +60,56 @@ public class Page {
         happyPurchaseCard.waitUntil(visible, 15000);
     }
 
+    // неуспешная покупка тура (не в кредит)
+
+    public void errorPurchase() {
+        errorPurchaseCard.waitUntil(visible, 15000);
+    }
+
+
+    // методы описывающие ошибки при неверном заполнении полей
+
+    public void errorCardNumberField() {
+        cardNumberField.parent().parent().$(".input__sub").shouldHave(exactText("Неверный формат"));
+    }
+
+    public void errorMonthField() {
+        monthField.parent().parent().$(".input__sub").shouldHave(exactText("Неверно указан срок действия карты"));
+    }
+
+    public void errorPastYearField() {
+        yearField.parent().parent().$(".input__sub").shouldHave(exactText("Истёк срок действия карты"));
+    }
+
+    public void errorPastYearFutureField() {
+        yearField.parent().parent().$(".input__sub").shouldHave(exactText("Неправильный срок действия карты")); // ошибка не предусмотрена разработчиком, текст придуман
+    }
+
+    public void errorCvcCvvField() {
+        cvcCvvField.parent().parent().$(".input__sub").shouldHave(exactText("Неверный формат"));
+    }
+
+    public void errorOwnerField() {
+        ownerField.parent().parent().$(".input__sub").shouldHave(exactText("Неверный формат")); // ошибка не предусмотрена разработчиком, текст придуман
+    }
+
+    public void errorEmptyCardNumberField() {
+        cardNumberField.parent().parent().$(".input__sub").shouldHave(exactText("Неверный формат"));
+    }
+
+    public void errorEmptyMonthField() {
+        monthField.parent().parent().$(".input__sub").shouldHave(exactText("Неверный формат"));
+    }
+
+    public void errorEmptyYearField() {
+        yearField.parent().parent().$(".input__sub").shouldHave(exactText("Неверный формат"));
+    }
+
+    public void errorEmptyOwnerField() {
+        ownerField.parent().parent().$(".input__sub").shouldHave(exactText("Поле обязательно для заполнения"));
+    }
+
+    public void errorEmptyCvcCvvField() {
+        cvcCvvField.parent().parent().$(".input__sub").shouldHave(exactText("Неверный формат"));
+    }
 }
