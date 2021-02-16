@@ -1,7 +1,10 @@
-package ru.netology;
+package ru.netology.test;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.netology.data.Card;
+import ru.netology.data.CardDataGenerator;
+import ru.netology.page.Page;
 
 import static com.codeborne.selenide.Selenide.*;
 

@@ -1,6 +1,7 @@
-package ru.netology;
+package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
+import ru.netology.data.Card;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
