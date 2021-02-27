@@ -44,6 +44,11 @@ public class CardDataGenerator {
         return LocalDate.now().format(DateTimeFormatter.ofPattern("MM"));
     }
 
+    public static String nullMonth() {
+
+        return "00";
+    }
+
     public static String validMonth() {
         return LocalDate.now().plusMonths(faker.number().numberBetween(1,12)).format(DateTimeFormatter.ofPattern("MM"));
     }
@@ -67,7 +72,7 @@ public class CardDataGenerator {
     }
 
     public static String invalidYearFuture() { // срок действия карты обычно составляет 4 года
-        return LocalDate.now().plusYears(faker.number().numberBetween(5,50)).format(DateTimeFormatter.ofPattern("YY"));
+        return LocalDate.now().plusYears(faker.number().numberBetween(6,50)).format(DateTimeFormatter.ofPattern("YY"));
     }
 
     // Имя и Фамилия владельца карты

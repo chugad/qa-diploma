@@ -55,13 +55,13 @@ public class Page {
         cvcCvvField.setValue(card.getCvcCvv());
     }
 
-    // успешная покупка тура (не в кредит)
+    // успешная покупка тура
 
     public void happyPurchase() {
         happyPurchaseCard.waitUntil(visible, 15000);
     }
 
-    // неуспешная покупка тура (не в кредит)
+    // неуспешная покупка тура
 
     public void errorPurchase() {
         errorPurchaseCard.waitUntil(visible, 15000);
@@ -83,7 +83,7 @@ public class Page {
     }
 
     public void errorPastYearFutureField() {
-        yearField.parent().parent().$(".input__sub").shouldHave(exactText("Неправильный срок действия карты")); // ошибка не предусмотрена разработчиком, текст придуман
+        yearField.parent().parent().$(".input__sub").shouldHave(exactText("Неверно указан срок действия карты"));
     }
 
     public void errorCvcCvvField() {
