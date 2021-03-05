@@ -7,8 +7,14 @@
 1. Запустить контейнер командой: <br>
 * ```docker-compose up -d --build``` <br>
 
-2. Запустить приложение командой: <br>
-* `java -jar ./artifacts/aqa-shop.jar` <br>
+2.1 Запустить приложение для работы с MySQL командой: <br>
+* `java -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -jar artifacts/aqa-shop.jar` <br>
+
+либо
+
+2.2 Запустить приложение для работы с PostgreSQL командой: <br>
+* `java -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app -jar artifacts/aqa-shop.jar` <br>
+
 
 3. Запустить автоматизированное тестирование командой: <br>
 * `gradlew test` <br>
