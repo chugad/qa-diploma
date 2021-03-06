@@ -1,12 +1,18 @@
 package ru.netology.test;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.Card;
 import ru.netology.data.CardDataGenerator;
+import ru.netology.data.SQLDataGenerator;
 import ru.netology.page.Page;
 
+import java.sql.SQLException;
+
 import static com.codeborne.selenide.Selenide.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class PageCardTest {
@@ -29,6 +35,7 @@ class PageCardTest {
         mainPage.insertCardData(approvedCard);
         mainPage.clickContinueBottom();
         mainPage.happyPurchase();
+        Assertions.assertTrue(SQLDataGenerator.approvedPay());
     }
 
     @Test
@@ -44,6 +51,7 @@ class PageCardTest {
         mainPage.insertCardData(approvedCard);
         mainPage.clickContinueBottom();
         mainPage.happyPurchase();
+        Assertions.assertTrue(SQLDataGenerator.approvedPay());
     }
 
     @Test // issue: https://github.com/chugad/qa-diploma/issues/2
@@ -57,6 +65,7 @@ class PageCardTest {
         mainPage.insertCardData(declinedCard);
         mainPage.clickContinueBottom();
         mainPage.errorPurchase();
+        Assertions.assertTrue(SQLDataGenerator.declinedPay());
     }
 
     @Test
@@ -263,7 +272,7 @@ class PageCardTest {
 
     // ПОКУПКА ТУРА В КРЕДИТ, КНОПКА "КУПИТЬ В КРЕДИТ"
 
-    @Test
+    @Test // ИШЬЮ
     // 19. Успешная покупка тура в кредит с валидным номером карты с разрешенной оплатой (APPROVED).
     public void happyPath_validAllFields_approvedCard_CREDIT() {
         Card approvedCard = new Card();
@@ -274,6 +283,7 @@ class PageCardTest {
         mainPage.insertCardData(approvedCard);
         mainPage.clickContinueBottom();
         mainPage.happyPurchase();
+        Assertions.assertTrue(SQLDataGenerator.approvedCredit());
     }
 
     @Test
@@ -289,9 +299,10 @@ class PageCardTest {
         mainPage.insertCardData(approvedCard);
         mainPage.clickContinueBottom();
         mainPage.happyPurchase();
+        Assertions.assertTrue(SQLDataGenerator.approvedCredit());
     }
 
-    @Test // issue: https://github.com/chugad/qa-diploma/issues/2
+    @Test // issue: https://github.com/chugad/qa-diploma/issues/2 ЕЩЕ ОДНО ИШЬЮ
     // 21. Неуспешная покупка тура в кредит с валидным номером карты с запрещенной оплатой (DECLINED).
     public void errorPath_validAllFields_declinedCard_CREDIT() {
         Card declinedCard = new Card();
@@ -302,6 +313,7 @@ class PageCardTest {
         mainPage.insertCardData(declinedCard);
         mainPage.clickContinueBottom();
         mainPage.errorPurchase();
+        Assertions.assertTrue(SQLDataGenerator.declinedCredit());
     }
 
     @Test
@@ -504,6 +516,11 @@ class PageCardTest {
         mainPage.insertCardData(newCard);
         mainPage.clickContinueBottom();
         mainPage.errorCvcCvvField();
+    }
+
+    @AfterEach
+    public void cleanTables() throws SQLException {
+        SQLDataGenerator.cleanTables();
     }
 
 }
