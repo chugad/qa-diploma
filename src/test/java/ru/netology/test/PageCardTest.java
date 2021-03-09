@@ -1,9 +1,8 @@
 package ru.netology.test;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.*;
 import ru.netology.data.Card;
 import ru.netology.data.CardDataGenerator;
 import ru.netology.data.SQLDataGenerator;
@@ -20,6 +19,16 @@ class PageCardTest {
     @BeforeEach
     void shouldStartBeforeEachTest() {
         open("http://localhost:8080");
+    }
+
+    @BeforeAll
+    static void setUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
     }
 
     // ПОКУПКА ТУРА НЕ В КРЕДИТ, КНОПКА "КУПИТЬ"
