@@ -2,6 +2,8 @@
 
 [План автоматизации тестирования веб-сервиса покупки тура](https://github.com/chugad/qa-diploma/blob/master/documents/Plan.md) <br>
 [Отчет по итогам тестирования веб-сервиса покупки тура](https://github.com/chugad/qa-diploma/blob/master/documents/Report.md) <br>
+[Отчет по итогам автоматизации тестирования веб-сервиса покупки тура](https://github.com/chugad/qa-diploma/blob/master/documents/Summary.md) <br>
+
 
 ## Запуск автотестов
 
